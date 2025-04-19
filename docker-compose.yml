@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: tmsdbo  # Change this to a strong password
+      MYSQL_DATABASE: mydb               # Optional: default database
+      MYSQL_USER: tmsuser                 # Optional: non-root user
+      MYSQL_PASSWORD: tmsuser         # Optional: non-root user's password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/data/mysql:/var/lib/mysql

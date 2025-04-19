@@ -1,0 +1,5 @@
+Redis
+docker run -d -v ~/data/redis/data:/data -p 6389:6379 -p 8001:8001  --name tmsRedis redis/redis-stack:latest
+
+MySQL
+docker run -d -v ~/data/mysql/data:/var/lib/mysql -p 3306:3306 -p 8002:8002 --name tmsMysql -e MYSQL_ROOT_PASSWORD=tmsMysql mysql:latest
