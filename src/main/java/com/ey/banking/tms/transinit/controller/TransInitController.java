@@ -1,17 +1,27 @@
 package com.ey.banking.tms.transinit.controller;
 
+import com.ey.banking.tms.transinit.service.TransInitService;
+import com.ey.banking.tms.transinit.model.TransactionDetail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/transinit/v1")
 public class TransInitController {
 
+
+    @Autowired
+    private TransInitService transInitService;
+
     @PostMapping("/initialize/{acountId}")
-    public ResponseEntity<Object> initTransaction(@PathVariable){
+    public ResponseEntity<Object> initTransaction(@PathVariable("acountId") Long accountid, @RequestBody TransactionDetail transactionDetail) {
+        // Logic to initialize transaction
+        // For example, save transaction details to the database
+        TransactionDetail transDetail = transInitService.initializeTransaction(accountid, transactionDetail);
+        System.out.println("Transaction initialized successfully for account ID: " + transDetail);
+
+        return ResponseEntity.ok("Transaction initialized successfully for account ID: " + accountid);
 
     }
 }

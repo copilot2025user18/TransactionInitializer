@@ -1,0 +1,44 @@
+package com.ey.banking.tms.transinit.service;
+
+import com.ey.banking.tms.transinit.model.Account;
+import com.ey.banking.tms.transinit.model.BenefAccount;
+import com.ey.banking.tms.transinit.repo.BenefAccountRepo;
+import org.hibernate.annotations.Cache;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.Optional;
+
+@Service
+public class AccountService {
+
+    BenefAccountRepo benefitAccountRepo;
+
+    public Account getAccountByAccountId(Long accountId){
+        Account account = new Account();
+        account.setAccountId(accountId);
+        account.setAccountHolderName("John Doe");
+        account.setAccountType(Account.AccountType.SAVINGS);
+        account.setBranchName("Main Branch");
+        account.setIfscCode("BOA1234567");
+        return account;
+    }
+
+    
+    @Cacheable(value = "benefAccountCache", key = "#benefetryAccount.accountId")
+    public BenefAccount findBenefAccountIfExists(BenefAccount benefetryAccount) {
+
+       Optional<BenefAccount> optional = benefitAccountRepo.findById(benefetryAccount.getAccountId());
+        return optional.orElseGet(() -> benefitAccountRepo.save(benefetryAccount));
+    }
+
+    public Boolean checkBalenceForTrans(BigDecimal amount, Account sourceAccount) {
+        return true;
+    }
+
+    public Boolean checkTransLimitExausted(BigDecimal amount, Account sourceAccount) {
+        return true;
+    }
+}
