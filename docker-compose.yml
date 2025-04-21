@@ -1,13 +1,41 @@
 version: '3.8'
 
 services:
+  app:
+    image: openjdk:21-jdk-slim
+    container_name: TMS_Transaction_Initializer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mysql_tms_ti
+      SPRING_DATASOURCE_USERNAME: tmsuser
+      SPRING_DATASOURCE_PASSWORD: tmsuser
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    depends_on:
+      - mysql
+      - redis
+
+
+  redis:
+    image: redis/redis-stack:latest
+    container_name: tmsRedis
+    ports:
+      - "6389:6379"
+      - "8001:8001"
+    volumes:
+      - ~/data/redis/data:/data
+
   mysql:
     image: mysql:8
     container_name: mysql8
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: tmsdbo  # Change this to a strong password
-      MYSQL_DATABASE: mydb               # Optional: default database
+      MYSQL_ROOT_PASSWORD: tmsroot  # Change this to a strong password
+      MYSQL_DATABASE: mysql_tms_ti               # Optional: default database
       MYSQL_USER: tmsuser                 # Optional: non-root user
       MYSQL_PASSWORD: tmsuser         # Optional: non-root user's password
     ports:

@@ -1,6 +1,5 @@
 package com.ey.banking.tms.transinit.model;
 
-import jakarta.persistence.Entity;
 import lombok.Data;
 
 @Data

@@ -1,7 +1,7 @@
 package com.ey.banking.tms.transinit.controller;
 
-import com.ey.banking.tms.transinit.service.TransInitService;
 import com.ey.banking.tms.transinit.model.TransactionDetail;
+import com.ey.banking.tms.transinit.service.TransInitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
