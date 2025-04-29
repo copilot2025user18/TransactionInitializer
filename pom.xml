@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ey.banking.tms</groupId>
-	<artifactId>TransactionInitializer</artifactId>
+	<artifactId>tms_transaction_initializer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TransactionInitializer</name>
+	<name>TMS_Transaction_Initializer</name>
 	<description>This is part of Transaction management system.  The service initialize Transaction for the user.</description>
 	<url/>
 	<licenses>
@@ -93,14 +93,14 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
-			<version>3.4.4</version>
-
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<version>3.4.4</version>
-
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
 		</dependency>
 	</dependencies>
 
